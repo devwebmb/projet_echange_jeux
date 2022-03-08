@@ -1,5 +1,7 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const { User } = require("../database/sequelize");
+require("dotenv").config();
 
 exports.signup = (req, res, next) => {
   bcrypt.hash(req.body.password).then((hash) => {
@@ -33,11 +35,18 @@ exports.login = (req, res, next) => {
       }
       bcrypt.compare(req.body.password, user.password).then((valid) => {
         if (!valid) {
+          const token = jwt.sign(
+            { userId: user.id },
+            `${process.env.PRIVATE_KEY}`,
+            {
+              expiresIn: "24h",
+            }
+          );
           const message = "Le mot de passe est incorrect.";
           res.status(401).json({ message });
         }
         const message = "L'utilisateur a été connecté avecc succès";
-        return res.status(200).json({ message, data: user });
+        return res.status(200).json({ message, data: user, token });
       });
     })
     .catch((error) => {

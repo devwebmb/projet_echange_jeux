@@ -2,6 +2,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 require("dotenv").config();
 
 const UserModel = require("../models/User");
+const AnnouncementModel = require("../models/Announcement");
 
 const dataBase = new Sequelize(
   `${process.env.DB_NAME}`,
@@ -25,6 +26,7 @@ dataBase
   );
 
 const User = UserModel(dataBase, DataTypes);
+const Announcement = AnnouncementModel(dataBase, DataTypes);
 
 const initDb = () => {
   return dataBase
@@ -32,4 +34,4 @@ const initDb = () => {
     .then(() => console.log("La base de données est initialisée."));
 };
 
-module.exports = { initDb, User };
+module.exports = { initDb, User, Announcement };
