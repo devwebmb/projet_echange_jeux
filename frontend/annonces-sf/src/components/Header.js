@@ -1,20 +1,10 @@
-import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 const Header = () => {
-  const [connect, setConnect] = "";
-  useEffect(() => {
-    let connect;
-    let token = window.localStorage.token;
-    if (token) {
-      connect = true;
-      return (setConnect = connect);
-    } else {
-      connect = false;
-      return (setConnect = connect);
-    }
-    console.log(connect);
-  }, []);
+  const deconnect = () => {
+    localStorage.clear("token");
+    window.location.href();
+  };
 
   return (
     <div className="header">
@@ -29,8 +19,13 @@ const Header = () => {
           <NavLink to="/account">
             <li>Mon compte</li>
           </NavLink>
-          <NavLink to="/connect">
-            <li>{connect ? "Se déconnecter" : "se connecter"} </li>
+          <NavLink
+            to={window.localStorage.token ? "/" : "/connect"}
+            onClick={deconnect}
+          >
+            <li>
+              {window.localStorage.token ? "Se déconnecter" : "Se connecter"}
+            </li>
           </NavLink>
         </ul>
       </nav>

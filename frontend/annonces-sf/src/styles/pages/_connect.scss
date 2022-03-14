@@ -1,0 +1,76 @@
+.connect {
+  nav {
+    background: $color-4;
+    max-width: 600px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    margin: auto;
+    ul {
+      display: flex;
+      padding: 2% 0;
+      width: 100%;
+      margin-bottom: 0;
+      li {
+        text-decoration: none;
+        list-style-type: none;
+        color: #262626;
+        width: 50%;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.5s;
+        font-weight: bold;
+
+        &:hover {
+          color: $black;
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+
+  form {
+    max-width: 594px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: 3px solid $color-4;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+
+    label {
+      margin-bottom: 0.5rem;
+    }
+    legend {
+      margin: 1rem auto;
+      font-size: 1.5rem;
+    }
+    input {
+      width: 70%;
+      margin: 0 auto 1rem auto;
+      padding: 0.25rem;
+    }
+    input[type="submit"] {
+      width: 150px;
+      padding: 1%;
+      border-radius: 25px;
+      cursor: pointer;
+      background: $color-4;
+      border: none;
+      color: #262626;
+      transition: 0.5s;
+      font-weight: bold;
+
+      &:hover {
+        color: $black;
+        transform: scale(1.2);
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      input {
+        width: 90%;
+      }
+    }
+  }
+}
