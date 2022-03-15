@@ -4,11 +4,11 @@ const { User } = require("../database/sequelize");
 require("dotenv").config();
 
 exports.signup = (req, res, next) => {
-  bcrypt.hash(req.body.password).then((hash) => {
+  bcrypt.hash(req.body.password, 10).then((hash) => {
     User.create({
       email: req.body.email,
       pseudo: req.body.pseudo,
-      password: req.body.password,
+      password: hash,
     })
       .then((user) => {
         const message = `L'utilisateur ${req.body.pseudo} a été créé.`;
@@ -30,27 +30,28 @@ exports.login = (req, res, next) => {
   })
     .then((user) => {
       if (!user) {
-        const message = "L'utilisateur n'éxiste pas.";
+        const message = "L'utilisateur n'existe pas.";
         return res.status(404).json({ message });
       }
       bcrypt.compare(req.body.password, user.password).then((valid) => {
         if (!valid) {
-          const token = jwt.sign(
-            { userId: user.id },
-            `${process.env.PRIVATE_KEY}`,
-            {
-              expiresIn: "24h",
-            }
-          );
           const message = "Le mot de passe est incorrect.";
           res.status(401).json({ message });
         }
+        const token = jwt.sign(
+          { userId: user.id },
+          `${process.env.PRIVATE_KEY}`,
+          {
+            expiresIn: "24h",
+          }
+        );
         const message = "L'utilisateur a été connecté avecc succès";
         return res.status(200).json({ message, data: user, token });
       });
     })
     .catch((error) => {
-      "L'utilisateur n'a pas pu être connecté, réessayez dans un instant.";
+      const message =
+        "L'utilisateur n'a pas pu être connecté, réessayez dans un instant.";
       return res.status(500).json({ message, data: error });
     });
 };

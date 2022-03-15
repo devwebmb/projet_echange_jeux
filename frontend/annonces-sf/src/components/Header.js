@@ -3,6 +3,11 @@ import { NavLink } from "react-router-dom";
 const Header = () => {
   const deconnect = () => {
     localStorage.clear("token");
+    localStorage.clear("pseudo");
+    localStorage.clear("email");
+    localStorage.clear("isAdmin");
+    localStorage.clear("id");
+
     window.location.href();
   };
 
@@ -12,7 +17,10 @@ const Header = () => {
         <img src="" alt="Logo du site" />
       </div>
       <nav>
+        <label for="toggle">☰</label>
+        <input type="checkbox" id="toggle" />
         <ul>
+          <button>Déposer une annonce</button>
           <NavLink to="/">
             <li>Annonces</li>
           </NavLink>

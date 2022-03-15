@@ -1,5 +1,6 @@
-import { Axios } from "axios";
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Connect = () => {
   const [choice, setChoice] = useState("");
@@ -11,36 +12,74 @@ const Connect = () => {
   const [signupPseudo, setSignupPseudo] = useState();
   const [signupPassword, setSignupPassword] = useState();
 
-  const login = () => {
-    Axios.post(
-      `http://localhost:3080/api/user/login`,
-      {
-        email: loginEmail,
-        password: loginPassword,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
+  let navigate = useNavigate();
+
+  const login = (event) => {
+    event.preventDefault();
+    axios
+      .post(
+        `http://localhost:3080/api/user/login`,
+        {
+          email: loginEmail,
+          password: loginPassword,
         },
-      }
-    ).then((user) => {
-      console.log(user);
-    });
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((user) => {
+        console.log(user);
+        localStorage.setItem("pseudo", user.data.data.pseudo);
+        localStorage.setItem("email", user.data.data.email);
+        localStorage.setItem("id", user.data.data.id);
+        localStorage.setItem("isAdmin", user.data.data.isAdmin);
+        localStorage.setItem("token", user.data.token);
+        navigate("/");
+      });
   };
-  const signup = () => {
-    Axios.post(
-      `http://localhost:3080/api/user/signup`,
-      {
-        email: signupEmail,
-        pseudo: signupPseudo,
-        password: signupPassword,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
+
+  const signup = (event) => {
+    event.preventDefault();
+    axios
+      .post(
+        `http://localhost:3080/api/user/signup`,
+        {
+          email: signupEmail,
+          pseudo: signupPseudo,
+          password: signupPassword,
         },
-      }
-    ).then((user) => console.log(user));
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(() => {
+        axios
+          .post(
+            `http://localhost:3080/api/user/login`,
+            {
+              email: signupEmail,
+              password: signupPassword,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+          .then((user) => {
+            console.log(user);
+            localStorage.setItem("pseudo", user.data.data.pseudo);
+            localStorage.setItem("email", user.data.data.email);
+            localStorage.setItem("id", user.data.data.id);
+            localStorage.setItem("isAdmin", user.data.data.isAdmin);
+            localStorage.setItem("token", user.data.token);
+            navigate("/");
+          });
+      });
   };
 
   return (
