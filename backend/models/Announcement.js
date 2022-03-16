@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    post: {
+    annonce: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -16,8 +16,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    category: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     imgUrl: {
       type: DataTypes.STRING,
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
   });
 };

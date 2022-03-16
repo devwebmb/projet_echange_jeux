@@ -34,17 +34,21 @@ exports.getOneAnnouncement = (req, res, next) => {
 };
 
 exports.addAnnouncement = (req, res, next) => {
-  const post = req.body.post;
+  const annonce = req.body.annonce;
   const author = req.body.author;
   const title = req.body.title;
   const posterId = req.body.posterId;
+  const category = req.body.category;
+  const price = req.body.price;
   if (req.file) {
     const file = `${req.file.filename}`;
     Announcement.create({
       title: title,
       author: author,
-      post: post,
+      annonce: annonce,
       posterId: posterId,
+      category: category,
+      price: price,
       imgUrl: `${req.protocol}://${req.get("host")}/images/${file}`,
     })
       .then((announcement) => {
