@@ -1,0 +1,27 @@
+// colors
+
+$color-1: #ecf8f8;
+$color-2: #387d7a;
+$color-3: #ffbf46;
+$color-4: #24752d;
+$color-5: #2f2d2e;
+
+$black: #1e0f1c;
+$white: #fbfbfb;
+
+//fonts
+
+@font-face {
+  font-family: "alien";
+  src: url("../assets/fonts/alien-wars.ttf");
+}
+
+$font-1: "alien";
+
+// *
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

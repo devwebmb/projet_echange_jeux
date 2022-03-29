@@ -1,0 +1,71 @@
+// body {
+//   background-image: url(../../assets/images/galaxy-g64cb4e38f_1920.jpg);
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   cursor: url("../../assets/icons/soucoupe.cur"), auto;
+// }
+
+.home {
+  background-image: url(../../assets/images/galaxy-g64cb4e38f_1920.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: url("../../assets/icons/soucoupe.cur"), auto;
+  padding: 3% 0;
+
+  h1 {
+    color: $color-4;
+    font-family: $font-1;
+    font-size: 5rem;
+    letter-spacing: 4px;
+    background-color: $color-1;
+    width: 90%;
+    margin: auto;
+    padding: 2%;
+    text-align: center;
+    border-radius: 50%;
+  }
+
+  p {
+    color: $color-4;
+    font-family: $font-1;
+    font-size: 2rem;
+    width: 50%;
+    margin: 3% auto;
+    text-align: center;
+    background-color: $color-1;
+    padding: 2%;
+    border-radius: 10px;
+  }
+
+  a {
+    transition: 0.3s;
+    text-decoration: none;
+    color: $color-4;
+    &:hover {
+      color: $color-3;
+      cursor: url("../../assets/icons/fusee.cur"), auto;
+    }
+  }
+  .connect-btn {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+
+    button {
+      color: $color-4;
+      font-size: 2rem;
+      font-family: $font-1;
+      border: none;
+      cursor: url("../../assets/icons/fusee.cur"), auto;
+      background-color: $color-1;
+      padding: 10%;
+      border-radius: 10px;
+      transition: 0.3s;
+
+      &:hover {
+        color: $color-3;
+      }
+    }
+  }
+}
