@@ -16,7 +16,13 @@ $white: #fbfbfb;
   src: url("../assets/fonts/alien-wars.ttf");
 }
 
+@font-face {
+  font-family: "poppins";
+  src: url("../assets/fonts/Poppins-Regular.ttf");
+}
+
 $font-1: "alien";
+$font-2: "poppins";
 
 // *
 

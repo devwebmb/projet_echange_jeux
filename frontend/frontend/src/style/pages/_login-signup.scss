@@ -1,1 +1,40 @@
+.connect-navbar {
+  nav {
+    top: 0;
+    width: 70%;
+    max-width: 800px;
+    margin: auto;
+    height: 80px;
+    background: linear-gradient(45deg, $color-5, $color-2);
+    margin-top: 3%;
 
+    ul {
+      list-style-type: none;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+
+      li {
+        width: 50%;
+        text-align: center;
+      }
+
+      a {
+        color: $color-1;
+        text-decoration: none;
+        font-family: $font-2;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(0.2);
+        }
+      }
+    }
+
+    button {
+      display: none;
+    }
+  }
+}
