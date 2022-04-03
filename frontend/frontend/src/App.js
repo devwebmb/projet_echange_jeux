@@ -2,6 +2,9 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Main from "./pages/Main";
+import Account from "./pages/Account";
+import About from "./pages/About";
 
 function App() {
   return (
@@ -10,6 +13,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/main" element={<Main />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </div>
   );

@@ -1,0 +1,22 @@
+.add-annonce-btn {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  button {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    font-size: 1.3rem;
+    padding: 8px 12px;
+    background-color: #28615f;
+    color: $color-1;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}

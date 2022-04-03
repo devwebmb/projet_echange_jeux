@@ -13,7 +13,6 @@ export default function ConnectNavbar() {
             <NavLink to="/signup">S'inscrire</NavLink>
           </li>
         </ul>
-        <button>BTN</button>
       </nav>
     </div>
   );
