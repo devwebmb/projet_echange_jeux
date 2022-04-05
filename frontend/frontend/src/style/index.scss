@@ -1,6 +1,8 @@
 @import "./_settings.scss";
 @import "./pages/home";
 @import "./pages/login-signup";
-@import "./components/main-navbar";
-@import "./components/buttons";
-@import "./components/add-annonce";
+@import "./components/navbars/main-navbar";
+@import "./components/buttons/buttons";
+@import "./components/annonce/add-annonce";
+@import "./components/annonce/card";
+@import "./components/annonce/annonces-view";

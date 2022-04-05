@@ -1,7 +1,12 @@
-.home {
+html {
   background-image: url(../../assets/images/galaxy-g64cb4e38f_1920.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+  margin: 0;
+  padding: 0;
+}
+
+.home {
   cursor: url("../../assets/icons/soucoupe.cur"), auto;
   padding: 3% 0;
 

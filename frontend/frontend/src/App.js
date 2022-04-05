@@ -5,6 +5,7 @@ import Signup from "./pages/Signup";
 import Main from "./pages/Main";
 import Account from "./pages/Account";
 import About from "./pages/About";
+import AddAnnonce from "./pages/AddAnnonce";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/main" element={<Main />} />
         <Route path="/account" element={<Account />} />
         <Route path="/about" element={<About />} />
+        <Route path="/addannonce" element={<AddAnnonce />} />
       </Routes>
     </div>
   );

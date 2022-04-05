@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddAnnonceButton from "../buttons/AddAnnonceButton";
 import axios from "axios";
 
@@ -10,15 +10,41 @@ export default function AddAnnonce() {
     price: "",
   });
 
-  const [file, setFile] = useState();
+  const [selectedFile, setSelectedFile] = useState();
+  const [imageUrl, setImageUrl] = useState(null);
 
   const changeHandle = (e) => {
-    setFile(e.target.files[0].name);
+    setSelectedFile(e.target.files[0]);
   };
+
+  const addAnnonce = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("imgUrl", selectedFile);
+    formData.append("title", state.title);
+    formData.append("author", localStorage.pseudo);
+    formData.append("posterId", localStorage.id);
+    formData.append("annonce", state.description);
+    formData.append("category", state.category);
+    formData.append("price", state.price);
+
+    axios
+      .post(`http://localhost:3080/api/announcement`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((data) => console.log(data));
+  };
+
+  useEffect(() => {
+    if (selectedFile) {
+      setImageUrl(URL.createObjectURL(selectedFile));
+    }
+  }, [selectedFile]);
 
   return (
     <div className="add-annonce">
-      <form>
+      <form onSubmit={addAnnonce}>
         <legend>Votre annonce :</legend>
         <label htmlFor="title">Titre :</label>
         <input
@@ -46,11 +72,13 @@ export default function AddAnnonce() {
           <option value="figurines">Figurines</option>
           <option value="autres">Autres</option>
         </select>
-        <label htmlFor="files">Choisissez une image :</label>
-        <input type="file" name="files" id="files" onChange={changeHandle} />
-        <div>
-          <img src={state.file} alt="" />
-        </div>
+        <label htmlFor="file">Choisissez une image :</label>
+        <input type="file" name="file" id="file" onChange={changeHandle} />
+        {imageUrl && (
+          <div className="img-container">
+            <img src={imageUrl} alt="preview de l'image choisi" />
+          </div>
+        )}
         <label htmlFor="description">Description :</label>
         <textarea
           name="description"

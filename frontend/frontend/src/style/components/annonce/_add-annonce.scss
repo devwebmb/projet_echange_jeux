@@ -1,7 +1,7 @@
 .add-annonce {
   width: 90%;
   max-width: 900px;
-  margin: auto;
+  margin: 2% auto;
 
   form {
     display: flex;
@@ -31,6 +31,21 @@
       margin: auto;
       margin-bottom: 2%;
       padding: 5px;
+    }
+
+    .img-container {
+      width: 150px;
+      height: 150px;
+      margin: auto;
+      border: solid 2px $color-2;
+      background: $white;
+
+      img {
+        width: 90%;
+        height: 90%;
+        margin: 5%;
+        object-fit: cover;
+      }
     }
 
     .price-input {

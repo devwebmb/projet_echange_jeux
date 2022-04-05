@@ -64,7 +64,7 @@ exports.addAnnouncement = (req, res, next) => {
     Announcement.create({
       title: title,
       author: author,
-      post: post,
+      annonce: annonce,
       posterId: posterId,
     })
       .then((announcement) => {
