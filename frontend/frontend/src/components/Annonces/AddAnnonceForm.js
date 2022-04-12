@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AddAnnonceButton from "../buttons/AddAnnonceButton";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function AddAnnonce() {
   const [state, setState] = useState({
@@ -12,6 +13,8 @@ export default function AddAnnonce() {
 
   const [selectedFile, setSelectedFile] = useState();
   const [imageUrl, setImageUrl] = useState(null);
+
+  const navigate = useNavigate();
 
   const changeHandle = (e) => {
     setSelectedFile(e.target.files[0]);
@@ -33,7 +36,8 @@ export default function AddAnnonce() {
       .post(`http://localhost:3080/api/announcement`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
-      .then((data) => console.log(data));
+      .then((data) => console.log(data))
+      .then(() => navigate("/main"));
   };
 
   useEffect(() => {
@@ -59,7 +63,7 @@ export default function AddAnnonce() {
           name="category"
           id="select-category"
           value={state.category}
-          onChange={(e) => ({ ...state, category: e.target.value })}
+          onChange={(e) => setState({ ...state, category: e.target.value })}
         >
           <option value="select">Choisissez une catégorie</option>
           <option value="livres">Livres</option>

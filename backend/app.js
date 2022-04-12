@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const sequelize = require("./database/sequelize");
 const userRoutes = require("./routes/user");
 const announcementRoutes = require("./routes/announcement");
+const path = require("path");
 
 const app = express();
 
@@ -22,6 +23,8 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 sequelize.initDb();
+
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use("/api/user", userRoutes);
 app.use("/api/announcement", announcementRoutes);
