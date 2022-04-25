@@ -1,4 +1,4 @@
-html {
+.screen-background {
   background-image: url(../../assets/images/galaxy-g64cb4e38f_1920.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -10,17 +10,15 @@ html {
   cursor: url("../../assets/icons/soucoupe.cur"), auto;
   padding: 3% 0;
 
-  h1 {
-    color: $color-4;
-    font-family: $font-1;
-    font-size: 5rem;
-    letter-spacing: 4px;
-    background-color: $color-1;
-    width: 90%;
-    margin: auto;
-    padding: 2%;
-    text-align: center;
-    border-radius: 50%;
+  #logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    img {
+      background: $color-1;
+      border-radius: 50%;
+    }
   }
 
   p {

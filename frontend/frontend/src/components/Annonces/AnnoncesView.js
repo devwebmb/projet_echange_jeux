@@ -27,8 +27,6 @@ export default function AnnoncesView() {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  console.log(currentPage);
-
   return (
     // <div className="annonces-view">
     //   {annonces.map((item) => {
@@ -53,6 +51,7 @@ export default function AnnoncesView() {
         annoncesPerPage={annoncesPerPage}
         totalAnnonces={annonces.length}
         paginate={paginate}
+        currentPage={currentPage}
       />
     </div>
   );

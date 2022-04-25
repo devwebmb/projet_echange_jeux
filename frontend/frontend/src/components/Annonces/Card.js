@@ -15,7 +15,7 @@ export default function Card({ annonces, loading }) {
         return (
           <div key={item.id} className="card">
             <div className="top-img">
-              <img src={item.imgUrl} alt="photo de l'annonce" />
+              <img src={item.imgUrl1} alt="photo de l'annonce" />
             </div>
             <hr />
             <h2>{item.title}</h2>

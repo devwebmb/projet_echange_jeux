@@ -2,7 +2,7 @@ const { Announcement } = require("../database/sequelize");
 const fs = require("fs");
 
 exports.getAllAnnouncements = (req, res, next) => {
-  Announcement.findAll()
+  Announcement.findAll({ order: [["updatedAt", "DESC"]] })
     .then((announcements) => {
       const message = "voici toutes les annonces.";
       res.status(200).json({ message, data: announcements });
@@ -49,7 +49,7 @@ exports.addAnnouncement = (req, res, next) => {
       posterId: posterId,
       category: category,
       price: price,
-      imgUrl: `${req.protocol}://${req.get("host")}/images/${file}`,
+      imgUrl1: `${req.protocol}://${req.get("host")}/images/${file}`,
     })
       .then((announcement) => {
         const message = " Votre annonce a été créée.";

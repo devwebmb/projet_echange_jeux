@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    imgUrl: {
+    imgUrl1: {
       type: DataTypes.STRING,
     },
     price: {

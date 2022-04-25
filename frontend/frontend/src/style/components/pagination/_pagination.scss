@@ -1,8 +1,23 @@
 .pagination {
+  background: $color-1;
   ul {
+    display: flex;
+    justify-content: center;
+    padding: 2% 0;
     li {
-      color: red;
+      list-style-type: none;
+      color: $black;
+      background: $white;
       cursor: pointer;
+      font-size: 2rem;
+      margin-right: 10px;
+      border: 2px solid $black;
+      padding: 0 5px;
+      transition: 0.3s;
+    }
+    .active {
+      color: $color-1;
+      background: $color-2;
     }
   }
 }

@@ -1,11 +1,14 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
+import logo from "../assets/images/Prix__6_-removebg-preview (1).png";
 
 export default function Home() {
   return (
     <div className="screen-background">
       <div className="home">
-        <h1 className="title">SALUT LES MARTIENS !</h1>
+        <div id="logo">
+          <img src={logo} alt="" />
+        </div>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil iusto a
           dolore illo, blanditiis, omnis, nobis ipsum sit facilis fuga deleniti

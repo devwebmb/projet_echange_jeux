@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function Pagination({
   annoncesPerPage,
   totalAnnonces,
   paginate,
+  currentPage,
 }) {
   const pageNumbers = [];
 
@@ -14,7 +15,11 @@ export default function Pagination({
     <nav className="pagination">
       <ul>
         {pageNumbers.map((number) => (
-          <li key={number} onClick={() => paginate(number)}>
+          <li
+            key={number}
+            onClick={() => paginate(number)}
+            className={currentPage === number ? "active" : null}
+          >
             {number}
           </li>
         ))}

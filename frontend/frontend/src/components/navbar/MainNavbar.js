@@ -6,6 +6,14 @@ export default function MainNavbar() {
   const [toggle, setToggle] = useState(false);
   const [largeur, setLargeur] = useState(window.innerWidth);
 
+  const deconnect = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("pseudo");
+    localStorage.removeItem("email");
+    localStorage.removeItem("id");
+    localStorage.removeItem("isAdmin");
+  };
+
   const changeToggle = () => {
     setToggle(!toggle);
     console.log(toggle);
@@ -54,7 +62,9 @@ export default function MainNavbar() {
               {" "}
               &Aacute; propos
             </NavLink>
-            <a href="/">Se déconnecter</a>
+            <a href="/" onClick={deconnect}>
+              Se déconnecter
+            </a>
           </ul>
         )}
       </nav>
