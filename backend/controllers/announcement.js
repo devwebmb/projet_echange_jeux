@@ -40,8 +40,10 @@ exports.addAnnouncement = (req, res, next) => {
   const posterId = req.body.posterId;
   const category = req.body.category;
   const price = req.body.price;
-  if (req.file) {
-    const file = `${req.file.filename}`;
+  if (req.files) {
+    const file = req.files[0] ? `${req.files[0].filename}` : null;
+    const file2 = req.files[1] ? `${req.files[1].filename}` : null;
+    const file3 = req.files[2] ? `${req.files[2].filename} ` : null;
     Announcement.create({
       title: title,
       author: author,
@@ -49,7 +51,15 @@ exports.addAnnouncement = (req, res, next) => {
       posterId: posterId,
       category: category,
       price: price,
-      imgUrl1: `${req.protocol}://${req.get("host")}/images/${file}`,
+      imgUrl1: file
+        ? `${req.protocol}://${req.get("host")}/images/${file}`
+        : null,
+      imgUrl2: file2
+        ? `${req.protocol}://${req.get("host")}/images/${file2}`
+        : null,
+      imgUrl3: file3
+        ? `${req.protocol}://${req.get("host")}/images/${file3}`
+        : null,
     })
       .then((announcement) => {
         const message = " Votre annonce a été créée.";

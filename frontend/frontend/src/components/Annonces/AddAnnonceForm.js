@@ -20,6 +20,7 @@ export default function AddAnnonce() {
   const [imageUrl, setImageUrl] = useState();
   const [imageUrl2, setImageUrl2] = useState();
   const [imageUrl3, setImageUrl3] = useState();
+  const [imgUrlArray, setImgUrlArray] = useState([]);
 
   const hiddenFileInput = React.useRef(null);
   const hiddenFileInput2 = React.useRef(null);
@@ -29,6 +30,7 @@ export default function AddAnnonce() {
 
   console.log(selectedFile);
   console.log(imageUrl);
+  console.log(imgUrlArray);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -45,19 +47,48 @@ export default function AddAnnonce() {
 
   const changeHandle = (e) => {
     setSelectedFile(e.target.files[0]);
+    if (imgUrlArray[0]) {
+      imgUrlArray.splice(0, 1);
+    }
+    const newArr = [...imgUrlArray];
+    newArr.splice(0, 0, e.target.files[0]);
+    setImgUrlArray(newArr);
   };
   const changeHandle2 = (e) => {
     setSelectedFile2(e.target.files[0]);
+    if (imgUrlArray[1]) {
+      imgUrlArray.splice(1, 1);
+    }
+    const newArr = [...imgUrlArray];
+    newArr.splice(1, 0, e.target.files[0]);
+    setImgUrlArray(newArr);
   };
   const changeHandle3 = (e) => {
     setSelectedFile3(e.target.files[0]);
+    if (imgUrlArray[2]) {
+      imgUrlArray.splice(2, 1);
+    }
+    const newArr = [...imgUrlArray];
+    newArr.splice(2, 0, e.target.files[0]);
+    setImgUrlArray(newArr);
+  };
+
+  const deletePreview = () => {
+    setSelectedFile(null);
+    if (imageUrl2) {
+      setImageUrl(imageUrl2);
+    }
   };
 
   const addAnnonce = (e) => {
     e.preventDefault();
 
+    console.log(imgUrlArray);
     const formData = new FormData();
-    formData.append("imgUrl1", selectedFile);
+    for (let i = 0; i < imgUrlArray.length; i++) {
+      formData.append("imgUrl1", imgUrlArray[i]);
+      console.log(imgUrlArray[i]);
+    }
     formData.append("title", state.title);
     formData.append("author", localStorage.pseudo);
     formData.append("posterId", localStorage.id);
@@ -117,6 +148,7 @@ export default function AddAnnonce() {
         </select>
 
         <label htmlFor="file">Choisissez des images :</label>
+
         <div className="preview">
           <div className="img-container">
             {!imageUrl && (
@@ -136,12 +168,20 @@ export default function AddAnnonce() {
             )}
             {imageUrl && (
               <>
+                <input
+                  type="file"
+                  name="file"
+                  className="file"
+                  ref={hiddenFileInput}
+                  onChange={changeHandle}
+                />
                 <img src={imageUrl} alt="preview de l'image choisi" />{" "}
                 <div className="icon-preview upload">
                   <img
                     src={upload}
                     alt="icone d'un upload"
                     title="Changer l'image"
+                    onClick={handleClick}
                   />
                 </div>
                 <div className="icon-preview trash">
@@ -149,52 +189,62 @@ export default function AddAnnonce() {
                     src={trash}
                     alt="icone d'une poubelle"
                     title="Supprimer l'image"
+                    onClick={deletePreview}
                   />
                 </div>
               </>
             )}
           </div>
-
-          <div className="img-container">
-            {!imageUrl2 && (
-              <>
-                <input
-                  type="file"
-                  name="file"
-                  className="file"
-                  ref={hiddenFileInput2}
-                  onChange={changeHandle2}
-                />
-                <FileButton
-                  func={handleClick2}
-                  txt={"Ajouter une image"}
-                ></FileButton>
-              </>
-            )}
-            {imageUrl2 && (
-              <>
-                <img src={imageUrl2} alt="preview de l'image choisi" />
-                <div className="icon-preview upload">
-                  <img
-                    src={upload}
-                    alt="icone d'un upload"
-                    title="Changer l'image"
+          {imageUrl && (
+            <div className="img-container">
+              {imageUrl && !imageUrl2 && (
+                <>
+                  <input
+                    type="file"
+                    name="file"
+                    className="file"
+                    ref={hiddenFileInput2}
+                    onChange={changeHandle2}
                   />
-                </div>
-                <div className="icon-preview trash">
-                  <img
-                    src={trash}
-                    alt="icone d'une poubelle"
-                    title="Supprimer l'image"
+                  <FileButton
+                    func={handleClick2}
+                    txt={"Ajouter une image"}
+                  ></FileButton>
+                </>
+              )}
+              {imageUrl2 && (
+                <>
+                  <input
+                    type="file"
+                    name="file"
+                    className="file"
+                    ref={hiddenFileInput2}
+                    onChange={changeHandle2}
                   />
-                </div>
-              </>
-            )}
-          </div>
+                  <img src={imageUrl2} alt="preview de l'image choisi" />
+                  <div className="icon-preview upload">
+                    <img
+                      src={upload}
+                      alt="icone d'un upload"
+                      title="Changer l'image"
+                      onClick={handleClick2}
+                    />
+                  </div>
+                  <div className="icon-preview trash">
+                    <img
+                      src={trash}
+                      alt="icone d'une poubelle"
+                      title="Supprimer l'image"
+                    />
+                  </div>
+                </>
+              )}
+            </div>
+          )}
 
-          <div className="img-container">
-            {!imageUrl3 && (
-              <>
+          {imageUrl2 && !imageUrl3 && (
+            <>
+              <div className="img-container">
                 <input
                   type="file"
                   name="file"
@@ -206,16 +256,26 @@ export default function AddAnnonce() {
                   func={handleClick3}
                   txt={"Ajouter une image"}
                 ></FileButton>
-              </>
-            )}
-            {imageUrl3 && (
-              <>
+              </div>
+            </>
+          )}
+          {imageUrl3 && (
+            <>
+              <div className="img-container">
+                <input
+                  type="file"
+                  name="file"
+                  className="file"
+                  ref={hiddenFileInput3}
+                  onChange={changeHandle3}
+                />
                 <img src={imageUrl3} alt="preview de l'image choisi" />{" "}
                 <div className="icon-preview upload">
                   <img
                     src={upload}
                     alt="icone d'un upload"
                     title="Changer l'image"
+                    onClick={handleClick3}
                   />
                 </div>
                 <div className="icon-preview trash">
@@ -224,10 +284,10 @@ export default function AddAnnonce() {
                     alt="icone d'une poubelle"
                     title="Supprimer l'image"
                   />
-                </div>
-              </>
-            )}
-          </div>
+                </div>{" "}
+              </div>
+            </>
+          )}
         </div>
 
         <label htmlFor="description">Description :</label>
@@ -239,6 +299,7 @@ export default function AddAnnonce() {
           value={state.description}
           onChange={(e) => setState({ ...state, description: e.target.value })}
         ></textarea>
+
         <label htmlFor="price">Prix :</label>
         <div className="price-input">
           <i>€</i>
